@@ -1,5 +1,5 @@
 /*!
- * JavaScript Cookie v2.1.1
+ * JavaScript Cookie v2.1.2
  * https://github.com/js-cookie/js-cookie
  *
  * Copyright 2006, 2015 Klaus Hartl & Fagner Brack
@@ -71,9 +71,9 @@
 
 				return (document.cookie = [
 					key, '=', value,
-					attributes.expires && '; expires=' + attributes.expires.toUTCString(), // use expires attribute, max-age is not supported by IE
-					attributes.path    && '; path=' + attributes.path,
-					attributes.domain  && '; domain=' + attributes.domain,
+					attributes.expires ? '; expires=' + attributes.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+					attributes.path ? '; path=' + attributes.path : '',
+					attributes.domain ? '; domain=' + attributes.domain : '',
 					attributes.secure ? '; secure' : ''
 				].join(''));
 			}
@@ -93,7 +93,6 @@
 
 			for (; i < cookies.length; i++) {
 				var parts = cookies[i].split('=');
-				var name = parts[0].replace(rdecode, decodeURIComponent);
 				var cookie = parts.slice(1).join('=');
 
 				if (cookie.charAt(0) === '"') {
@@ -101,6 +100,7 @@
 				}
 
 				try {
+					var name = parts[0].replace(rdecode, decodeURIComponent);
 					cookie = converter.read ?
 						converter.read(cookie, name) : converter(cookie, name) ||
 						cookie.replace(rdecode, decodeURIComponent);

@@ -18,7 +18,7 @@ A simple, lightweight JavaScript API for handling cookies
 * **~800 bytes** gzipped!
 
 **If you're viewing this at https://github.com/js-cookie/js-cookie, you're reading the documentation for the master branch.
-[View documentation for the latest release (2.1.1).](https://github.com/js-cookie/js-cookie/tree/v2.1.1#readme)**
+[View documentation for the latest release (2.1.2).](https://github.com/js-cookie/js-cookie/tree/v2.1.2#readme)**
 
 ## Build Status Matrix
 
@@ -26,7 +26,9 @@ A simple, lightweight JavaScript API for handling cookies
 
 ## Installation
 
-Include the script (unless you are packaging scripts somehow else):
+### Direct download
+
+Download the script [here](https://github.com/js-cookie/js-cookie/blob/v2.1.2/src/js.cookie.js) and include it (unless you are packaging scripts somehow else):
 
 ```html
 <script src="/path/to/js.cookie.js"></script>
@@ -35,9 +37,13 @@ Include the script (unless you are packaging scripts somehow else):
 **Do not include the script directly from GitHub (http://raw.github.com/...).** The file is being served as text/plain and as such being blocked
 in Internet Explorer on Windows 7 for instance (because of the wrong MIME type). Bottom line: GitHub is not a CDN.
 
-js-cookie supports [npm](https://www.npmjs.com/package/js-cookie) and [Bower](http://bower.io/search/?q=js-cookie) under the name `js-cookie`
+### Package Managers
 
-It can also be loaded as an AMD or CommonJS module.
+JavaScript Cookie supports [npm](https://www.npmjs.com/package/js-cookie) and [Bower](http://bower.io/search/?q=js-cookie) under the name `js-cookie`.
+
+### Module Loaders
+
+JavaScript Cookie can also be loaded as an AMD or CommonJS module.
 
 ## Basic Usage
 
@@ -86,7 +92,7 @@ Cookies.remove('name'); // fail!
 Cookies.remove('name', { path: '' }); // removed!
 ```
 
-*IMPORTANT! when deleting a cookie, you must pass the exact same path, domain and secure attributes that were used to set the cookie, unless you're relying on the [default attributes](#cookie-attributes).*
+*IMPORTANT! when deleting a cookie, you must pass the exact same path and domain attributes that was used to set the cookie, unless you're relying on the [default attributes](#cookie-attributes).*
 
 ## Namespace conflicts
 
@@ -136,7 +142,7 @@ Cookies.getJSON(); // => { name: { foo: 'bar' } }
 
 This project is [RFC 6265](http://tools.ietf.org/html/rfc6265#section-4.1.1) compliant. All special characters that are not allowed in the cookie-name or cookie-value are encoded with each one's UTF-8 Hex equivalent using [percent-encoding](http://en.wikipedia.org/wiki/Percent-encoding).  
 The only character in cookie-name or cookie-value that is allowed and still encoded is the percent `%` character, it is escaped in order to interpret percent input as literal.  
-To override the default cookie decoding you need to use a [converter](#converter).
+Please note that the default encoding/decoding strategy is meant to be interoperable [only between cookies that are read/written by js-cookie](https://github.com/js-cookie/js-cookie/pull/200#discussion_r63270778). To override the default encoding/decoding strategy you need to use a [converter](#converter).
 
 ## Cookie Attributes
 
@@ -271,6 +277,7 @@ Check out the [Contributing Guidelines](CONTRIBUTING.md)
 * Create version tag in git
 * Create a github release and upload the minified file
 * Link the documentation of the latest release tag in the `README.md`
+* Link the download link to the latest release tag in the `README.md`
 * Commit with the message "Prepare for the next development iteration"
 * Release on npm
 
