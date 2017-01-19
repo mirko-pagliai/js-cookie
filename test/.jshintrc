@@ -3,6 +3,7 @@
 	"qunit": true,
 
 	"-W053": true,
+	"-W097": true, // disable warning for 'Use the function form of "use strict".'
 
 	"extends": "../.jshintrc",
 	"globals": {
@@ -10,6 +11,7 @@
 		"unescape": true,
 		"lifecycle": true,
 		"using": true,
+		"quoted": true,
 		"addEvent": true,
 	  	"loadFileSync": true
 	}
