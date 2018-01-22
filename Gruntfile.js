@@ -168,13 +168,25 @@ module.exports = function (grunt) {
 								platform: 'OS X 10.10',
 								version: '8.0'
 							}, {
+								browserName: 'safari',
+								platform: 'OS X 10.11',
+								version: '9.0'
+							}, {
+								browserName: 'safari',
+								platform: 'OS X 10.11',
+								version: '10.0'
+							}, {
+								browserName: 'safari',
+								platform: 'OS X 10.12',
+								version: '11.0'
+							}, {
 								browserName: 'firefox',
-								platform: 'OS X 10.10',
-								version: '36.0'
+								platform: 'OS X 10.11',
+								version: '56.0'
 							}, {
 								browserName: 'chrome',
 								platform: 'OS X 10.10',
-								versiono: '41.0'
+								version: '61.0'
 							}],
 							'windows7': [{
 								browserName: 'internet explorer',
@@ -189,35 +201,18 @@ module.exports = function (grunt) {
 								platform: 'Windows 7',
 								version: '9.0'
 							}, {
-								browserName: 'opera',
+								browserName: 'internet explorer',
 								platform: 'Windows 7',
-								version: '12.12'
-							}],
-							'windowsXP': [{
-								browserName: 'internet explorer',
-								platform: 'Windows XP',
 								version: '8.0'
-							}, {
-								browserName: 'internet explorer',
-								platform: 'Windows XP',
-								version: '7.0'
-							}, {
-								browserName: 'internet explorer',
-								platform: 'Windows XP',
-								version: '6.0'
 							}],
 							'linux': [{
-								browserName: 'opera',
-								platform: 'Linux',
-								version: '12.15'
-							}, {
 								browserName: 'firefox',
 								platform: 'Linux',
-								version: '37.0'
+								version: '45.0'
 							}, {
 								browserName: 'chrome',
 								platform: 'Linux',
-								version: '41.0'
+								version: '48.0'
 							}]
 						};
 
