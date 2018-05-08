@@ -180,10 +180,10 @@ QUnit.test('undefined', function (assert) {
 
 QUnit.test('expires option as days from now', function (assert) {
 	assert.expect(1);
-	var sevenDaysFromNow = new Date();
-	sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 21);
-	var expected = 'expires=' + sevenDaysFromNow.toUTCString();
-	var actual = Cookies.set('c', 'v', { expires: 21 });
+	var days = 200;
+	var expires = new Date(new Date().valueOf() + days * 24 * 60 * 60 * 1000);
+	var expected = 'expires=' + expires.toUTCString();
+	var actual = Cookies.set('c', 'v', { expires: days });
 	assert.ok(actual.indexOf(expected) !== -1, quoted(actual) + ' includes ' + quoted(expected));
 });
 
@@ -292,6 +292,16 @@ QUnit.test('undefined attribute value', function (assert) {
 	assert.strictEqual(Cookies.set('c', 'v', {
 		unofficial: undefined
 	}), 'c=v; path=/', 'should not write undefined unofficial attribute');
+});
+
+// github.com/js-cookie/js-cookie/issues/396
+QUnit.test('sanitization of attributes to prevent XSS from untrusted input', function (assert) {
+	assert.expect(1);
+	assert.strictEqual(Cookies.set('c', 'v', {
+		path: '/;domain=sub.domain.com',
+		domain: 'site.com;remove_this',
+		customAttribute: 'value;;remove_this'
+	}), 'c=v; path=/; domain=site.com; customAttribute=value', 'should not allow semicolon in a cookie attribute');
 });
 
 QUnit.module('remove', lifecycle);
@@ -462,6 +472,11 @@ QUnit.test('Cookies with escaped quotes in json using raw converters', function 
 	}).set('c', '"{ \\"foo\\": \\"bar\\" }"');
 	assert.strictEqual(Cookies.getJSON('c'), '{ "foo": "bar" }', 'returns JSON parsed cookie');
 	assert.strictEqual(Cookies.get('c'), '{ \\"foo\\": \\"bar\\" }', 'returns unparsed cookie with enclosing quotes removed');
+});
+
+QUnit.test('Prevent accidentally writing cookie when passing unexpected argument', function (assert) {
+	Cookies.getJSON('c', { foo: 'bar' });
+	assert.strictEqual(Cookies.get('c'), undefined, 'should not write any cookie');
 });
 
 QUnit.module('noConflict', lifecycle);
